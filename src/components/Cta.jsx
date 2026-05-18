@@ -15,8 +15,8 @@ export function Cta() {
         <a href="#contact" className="btn-primary">
           Book a Free Consultation &rarr;
         </a>
-        <a href="mailto:hello@pixelcraft.com" className="btn-ghost btn-ghost-on-dark">
-          hello@pixelcraft.com
+        <a href="mailto:basimnnas@gmail.com" className="btn-ghost btn-ghost-on-dark">
+          basimnnas@gmail.com
         </a>
       </div>
     </div>

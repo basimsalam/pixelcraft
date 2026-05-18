@@ -1440,7 +1440,7 @@ export default function App() {
             <div className="footer-col-title">Contact</div>
             <ul className="footer-links">
               <li><a href="mailto:basimnnas@gmail.com">basimnnas@gmail.com</a></li>
-              <li><a href="tel:+966551234567">+966 50 65 36 605</a></li>
+              <li><a href="tel:+966506536605">+966 50 65 36 605</a></li>
               <li><a href="#">Riyadh, Saudi Arabia</a></li>
               <li style={{ marginTop: "1rem" }}>
                 <div style={{ display: "flex", gap: "0.7rem" }}>
