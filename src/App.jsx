@@ -27,8 +27,9 @@ const style = `
     overflow-x: hidden;
     cursor: none;
   }
+  a, button, input, textarea, select { font: inherit; }
 
-  /* Custom cursor â€” moved entirely to DOM refs + RAF, no React state */
+  /* Custom cursor moved entirely to DOM refs + RAF, no React state */
   .cursor {
     position: fixed;
     width: 12px; height: 12px;
@@ -55,6 +56,53 @@ const style = `
   }
   .cursor.hovered { width: 24px; height: 24px; background: var(--accent); }
   .cursor-ring.hovered { width: 60px; height: 60px; opacity: 0.2; }
+  .icon-svg {
+    width: 1em;
+    height: 1em;
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .service-icon .icon-svg,
+  .contact-detail-icon .icon-svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  .hero-pill .icon-svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    display: inline-block;
+    margin-right: 0.35rem;
+    vertical-align: -0.13rem;
+  }
+  .portfolio-bg .icon-svg {
+    width: 4rem;
+    height: 4rem;
+    color: var(--accent);
+    opacity: 0.95;
+  }
+  .portfolio-item:first-child .portfolio-bg .icon-svg {
+    width: 6rem;
+    height: 6rem;
+  }
+  .testimonial-stars {
+    display: flex;
+    gap: 0.2rem;
+  }
+  .testimonial-stars .icon-svg {
+    width: 0.82rem;
+    height: 0.82rem;
+    fill: currentColor;
+    stroke-width: 0;
+  }
+  .pricing-check .icon-svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    stroke-width: 2.4;
+  }
 
   /* Scrollbar */
   ::-webkit-scrollbar { width: 6px; }
@@ -363,7 +411,7 @@ const style = `
   @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
   /* Section base */
-  section { padding: 7rem 4rem; }
+  section { padding: clamp(5rem, 8vw, 7rem) clamp(1.25rem, 5vw, 4rem); }
   .section-tag {
     display: inline-flex; align-items: center; gap: 0.6rem;
     font-size: 0.73rem; font-weight: 500; letter-spacing: 0.15em;
@@ -444,7 +492,7 @@ const style = `
     transition: color 0.3s;
     display: flex; align-items: center; gap: 0.5rem;
   }
-  .service-list li::before { content: 'â†’'; color: var(--accent); font-size: 0.75rem; }
+  .service-list li::before { content: '>'; color: var(--accent); font-size: 0.75rem; }
   .service-card:hover .service-list li { color: var(--beige-mid); }
 
   /* Process */
@@ -786,7 +834,7 @@ const style = `
 
   /* Responsive */
   @media (max-width: 1100px) {
-    .hero { grid-template-columns: 1fr; padding-top: 8rem; }
+    .hero { grid-template-columns: 1fr; min-height: auto; padding: 8rem 3rem 5rem; }
     .hero-left { padding-right: 0; text-align: center; align-items: center; }
     .hero-right { display: none; }
     .hero-stats { width: min(100%, 620px); }
@@ -801,19 +849,36 @@ const style = `
     .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   }
 
+  @media (max-width: 920px) {
+    nav, nav.scrolled { padding-left: 2rem; padding-right: 2rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 620px; margin-left: auto; margin-right: auto; }
+    .pricing-card.featured { transform: none; }
+    .pricing-card.featured:hover { transform: translateY(-8px); }
+    .contact-grid { grid-template-columns: 1fr; gap: 4rem; }
+    .contact-info-desc { max-width: 620px; }
+    footer { padding-left: 2rem; padding-right: 2rem; }
+  }
+
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; }
     nav.scrolled { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
     section { padding: 5rem 1.5rem; }
-    .hero { padding: 0 1.5rem; padding-top: 7rem; }
+    .hero { padding: 7rem 1.5rem 4.5rem; }
+    .hero-title { font-size: clamp(2.75rem, 13vw, 4.2rem); }
+    .hero-desc { font-size: 1rem; max-width: 36rem; }
+    .hero-actions { justify-content: center; }
     .hero-stats { grid-template-columns: 1fr; margin-top: 3rem; padding: 1rem 0; }
     .hero-stat { padding: 1rem 0; }
     .hero-stat + .hero-stat { border-left: none; border-top: 1px solid var(--beige-mid); }
     .services-header { grid-template-columns: 1fr; gap: 1.5rem; }
     .services-grid { grid-template-columns: 1fr; }
     .service-card { border-right: none !important; }
+    .service-card:nth-last-child(-n+3) { border-bottom: 1px solid var(--beige-mid); }
+    .service-card:last-child { border-bottom: none; }
     .process-grid { grid-template-columns: 1fr; border: none; gap: 1rem; }
     .process-step { border-right: none; border: 1px solid rgba(255,255,255,0.08); }
     .process-arrow { display: none !important; }
@@ -831,15 +896,67 @@ const style = `
     .cta-section { padding: 5rem 1.5rem; }
     .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
   }
+
+  @media (max-width: 560px) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+    nav, nav.scrolled { padding-left: 1rem; padding-right: 1rem; }
+    .nav-logo { font-size: 1.25rem; }
+    .mobile-menu { gap: 2.2rem; }
+    .mobile-menu a { font-size: 2rem; }
+    section { padding: 4rem 1rem; }
+    .hero { padding: 6.5rem 1rem 4rem; }
+    .hero-tag { font-size: 0.68rem; margin-bottom: 1.5rem; }
+    .hero-tag::before { width: 22px; }
+    .hero-title { letter-spacing: -0.02em; }
+    .hero-actions { width: 100%; }
+    .hero-actions .btn-primary,
+    .hero-actions .btn-ghost,
+    .cta-actions .btn-primary,
+    .cta-actions .btn-ghost {
+      width: 100%;
+      justify-content: center;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .hero-stats { width: 100%; margin-top: 2.5rem; }
+    .services-header { margin-bottom: 3rem; }
+    .service-card,
+    .process-step,
+    .pricing-card,
+    .testimonial-card {
+      padding: 2rem 1.5rem;
+    }
+    .service-card { border-bottom: 1px solid var(--beige-mid) !important; }
+    .service-card:last-child { border-bottom: none !important; }
+    .portfolio-header { align-items: stretch; }
+    .portfolio-header .btn-ghost { justify-content: center; }
+    .portfolio-item:first-child .portfolio-img { min-height: 240px; }
+    .portfolio-overlay { opacity: 1; padding: 1.4rem; }
+    .portfolio-link { opacity: 1; }
+    .cta-title { font-size: clamp(2.2rem, 12vw, 3.3rem); }
+    .contact-detail { align-items: center; }
+    .footer-top { grid-template-columns: 1fr; gap: 2.25rem; }
+    .footer-bottom { align-items: flex-start; text-align: left; }
+    footer { padding: 4rem 1rem 2rem; }
+  }
+
+  @media (max-width: 380px) {
+    .hero-title { font-size: 2.45rem; }
+    .hero-desc { font-size: 0.95rem; }
+    .hero-stat-num { font-size: 2rem; }
+    .section-title { font-size: 2rem; }
+    .pricing-price { font-size: 2.45rem; }
+  }
 `;
 
 const SERVICES = [
-  { icon: "ðŸ–¥ï¸", name: "Web Design & Development", desc: "Pixel-perfect, high-converting websites built with modern tech that load fast and look stunning.", list: ["Custom React & Next.js builds", "CMS integration (WordPress, Sanity)", "E-commerce (Shopify, WooCommerce)"] },
-  { icon: "ðŸ“ˆ", name: "SEO Strategy", desc: "Data-driven SEO that climbs Google rankings, drives organic traffic, and turns visitors into leads.", list: ["Technical SEO audits", "Keyword research & mapping", "On-page & off-page optimization"] },
-  { icon: "âš¡", name: "Performance Optimization", desc: "Speed is conversion. We optimize Core Web Vitals, image delivery, and every millisecond.", list: ["Lighthouse score optimization", "CDN & caching setup", "Lazy loading & code splitting"] },
-  { icon: "ðŸŽ¯", name: "Landing Page Design", desc: "High-impact landing pages engineered to convert â€” from concept to A/B tested live pages.", list: ["Conversion rate optimization", "A/B testing frameworks", "Analytics & heatmap setup"] },
-  { icon: "ðŸ”—", name: "Local SEO", desc: "Dominate local search results and capture customers in your area before your competitors do.", list: ["Google Business optimization", "Local citation building", "Review strategy & management"] },
-  { icon: "ðŸ› ï¸", name: "Website Maintenance", desc: "Your site always running smoothly â€” updates, security, backups, and support on demand.", list: ["Monthly performance reports", "Security patches & updates", "Priority support & fixes"] },
+  { icon: "monitor", name: "Web Design & Development", desc: "Pixel-perfect, high-converting websites built with modern tech that load fast and look stunning.", list: ["Custom React & Next.js builds", "CMS integration (WordPress, Sanity)", "E-commerce (Shopify, WooCommerce)"] },
+  { icon: "chart", name: "SEO Strategy", desc: "Data-driven SEO that climbs Google rankings, drives organic traffic, and turns visitors into leads.", list: ["Technical SEO audits", "Keyword research & mapping", "On-page & off-page optimization"] },
+  { icon: "zap", name: "Performance Optimization", desc: "Speed is conversion. We optimize Core Web Vitals, image delivery, and every millisecond.", list: ["Lighthouse score optimization", "CDN & caching setup", "Lazy loading & code splitting"] },
+  { icon: "target", name: "Landing Page Design", desc: "High-impact landing pages engineered to convert, from concept to A/B tested live pages.", list: ["Conversion rate optimization", "A/B testing frameworks", "Analytics & heatmap setup"] },
+  { icon: "link", name: "Local SEO", desc: "Dominate local search results and capture customers in your area before your competitors do.", list: ["Google Business optimization", "Local citation building", "Review strategy & management"] },
+  { icon: "tool", name: "Website Maintenance", desc: "Your site always running smoothly with updates, security, backups, and support on demand.", list: ["Monthly performance reports", "Security patches & updates", "Priority support & fixes"] },
 ];
 
 const PROCESS = [
@@ -850,15 +967,15 @@ const PROCESS = [
 ];
 
 const PROJECTS = [
-  { title: "Luxe Interior Co.", tag: "Web Design + SEO", sub: "400% organic traffic growth in 6 months", color: "linear-gradient(135deg, #2C2A1E 0%, #1E1C10 100%)", emoji: "ðŸ " },
-  { title: "Nova Fitness Studio", tag: "Landing Page + Local SEO", sub: "#1 in local search results", color: "linear-gradient(135deg, #1A1910 0%, #2C2A1E 100%)", emoji: "ðŸ’ª" },
-  { title: "Maison Bakery", tag: "E-commerce + SEO", sub: "3Ã— online revenue in 3 months", color: "linear-gradient(135deg, #241F0E 0%, #1A1910 100%)", emoji: "ðŸ¥" },
+  { title: "Luxe Interior Co.", tag: "Web Design + SEO", sub: "400% organic traffic growth in 6 months", color: "linear-gradient(135deg, #2C2A1E 0%, #1E1C10 100%)", icon: "home" },
+  { title: "Nova Fitness Studio", tag: "Landing Page + Local SEO", sub: "#1 in local search results", color: "linear-gradient(135deg, #1A1910 0%, #2C2A1E 100%)", icon: "activity" },
+  { title: "Maison Bakery", tag: "E-commerce + SEO", sub: "3x online revenue in 3 months", color: "linear-gradient(135deg, #241F0E 0%, #1A1910 100%)", icon: "bag" },
 ];
 
 const TESTIMONIALS = [
-  { stars: "â˜…â˜…â˜…â˜…â˜…", text: "Working with this team transformed our online presence completely. Our organic traffic tripled within 4 months â€” results we never expected so quickly.", name: "Sarah Al-Rashidi", role: "CEO, Luxe Interiors", initials: "SR", color: "#C8A96E" },
-  { stars: "â˜…â˜…â˜…â˜…â˜…", text: "Our website went from invisible to ranking #1 locally. The design is stunning and our phone hasn't stopped ringing since launch.", name: "Mohammed Al-Otaibi", role: "Owner, Nova Fitness", initials: "MO", color: "#8B7D5A" },
-  { stars: "â˜…â˜…â˜…â˜…â˜…", text: "The attention to detail is incredible. Every pixel was considered, and the SEO strategy was data-driven and remarkably effective.", name: "Laila Hassan", role: "Director, Maison CafÃ©", initials: "LH", color: "#6B6450" },
+  { text: "Working with this team transformed our online presence completely. Our organic traffic tripled within 4 months, results we never expected so quickly.", name: "Sarah Al-Rashidi", role: "CEO, Luxe Interiors", initials: "SR", color: "#C8A96E" },
+  { text: "Our website went from invisible to ranking #1 locally. The design is stunning and our phone hasn't stopped ringing since launch.", name: "Mohammed Al-Otaibi", role: "Owner, Nova Fitness", initials: "MO", color: "#8B7D5A" },
+  { text: "The attention to detail is incredible. Every pixel was considered, and the SEO strategy was data-driven and remarkably effective.", name: "Laila Hassan", role: "Director, Maison Cafe", initials: "LH", color: "#6B6450" },
 ];
 
 const PRICING = [
@@ -867,13 +984,40 @@ const PRICING = [
   { name: "Enterprise", price: "Custom", period: "", desc: "Large-scale builds, ongoing retainers, and complex SEO campaigns.", features: ["Unlimited pages & features", "Monthly SEO retainer", "Dedicated account manager", "Custom integrations & CMS", "Priority 24h support", "Quarterly strategy reviews"], featured: false },
 ];
 
+function Icon({ name }) {
+  const paths = {
+    monitor: <><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M8 20h8M12 16v4" /></>,
+    chart: <><path d="M4 19V5" /><path d="M4 19h17" /><path d="M8 15l3-4 3 2 4-6" /></>,
+    zap: <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" />,
+    target: <><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="4" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3" /></>,
+    link: <><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1" /><path d="M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20.1l1.1-1.1" /></>,
+    tool: <><path d="M14.7 6.3a4 4 0 0 0-5 5L4 17v3h3l5.7-5.7a4 4 0 0 0 5-5l-3 3-2-2 3-3z" /></>,
+    home: <><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /><path d="M9 20v-6h6v6" /></>,
+    activity: <path d="M4 13h4l2-6 4 10 2-4h4" />,
+    bag: <><path d="M6 8h12l-1 13H7L6 8z" /><path d="M9 8a3 3 0 0 1 6 0" /></>,
+    mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M4 7l8 6 8-6" /></>,
+    phone: <path d="M6 3h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 4 5a2 2 0 0 1 2-2z" />,
+    pin: <><path d="M12 21s7-5.2 7-11a7 7 0 0 0-14 0c0 5.8 7 11 7 11z" /><circle cx="12" cy="10" r="2.5" /></>,
+    clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
+    trophy: <><path d="M8 4h8v4a4 4 0 0 1-8 0V4z" /><path d="M6 6H4a4 4 0 0 0 4 4M18 6h2a4 4 0 0 1-4 4M12 12v5M9 21h6M8 17h8" /></>,
+    star: <path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.8 1-6.1-4.4-4.3 6.1-.9L12 3z" />,
+    check: <path d="M5 12l4 4 10-10" />,
+  };
+
+  return (
+    <svg className="icon-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      {paths[name] ?? paths.monitor}
+    </svg>
+  );
+}
+
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", service: "", budget: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
 
-  // Cursor uses direct DOM refs â€” zero React re-renders on mouse move
+  // Cursor uses direct DOM refs, so mouse movement does not trigger React renders.
   const cursorDotRef = useRef(null);
   const cursorRingRef = useRef(null);
   const rafRef = useRef(null);
@@ -895,7 +1039,7 @@ export default function App() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Cursor: update DOM directly via RAF â€” never triggers a React render
+  // Cursor: update DOM directly via RAF.
   useEffect(() => {
     const onMove = (e) => { mousePos.current = { x: e.clientX, y: e.clientY }; };
     window.addEventListener("mousemove", onMove, { passive: true });
@@ -919,7 +1063,7 @@ export default function App() {
     };
   }, []);
 
-  // Cursor hover: single delegated listener on document â€” no per-element listeners
+  // Cursor hover: single delegated listener on document.
   useEffect(() => {
     const SELECTOR = "a, button, .service-card, .portfolio-item, .pricing-card";
     const onEnter = (e) => {
@@ -997,10 +1141,10 @@ export default function App() {
             <span className="outline">&amp; grow.</span>
           </h1>
           <p className="hero-desc">
-            I build fast, beautiful websites and craft SEO strategies that put your business in front of the right people â€” turning clicks into loyal customers.
+            I build fast, beautiful websites and craft SEO strategies that put your business in front of the right people, turning clicks into loyal customers.
           </p>
           <div className="hero-actions">
-            <a href="#contact" className="btn-primary">Start a Project â†’</a>
+            <a href="#contact" className="btn-primary">Start a Project &rarr;</a>
             <a href="#work" className="btn-ghost">View Work</a>
           </div>
           <div className="hero-stats" aria-label="PixelCraft performance highlights">
@@ -1023,9 +1167,9 @@ export default function App() {
             <div className="hero-badge">
               <div className="hero-badge-label">Organic Traffic</div>
               <div className="hero-badge-value">+312%</div>
-              <div className="hero-badge-sub">â†‘ Last 90 days</div>
+              <div className="hero-badge-sub">Up last 90 days</div>
             </div>
-            <div className="hero-pill">ðŸ† #1 on Google</div>
+            <div className="hero-pill"><Icon name="trophy" /> #1 on Google</div>
             <div className="hero-card-main">
               <div className="hero-browser-bar">
                 <div className="browser-dot" style={{ background: "#FF605C" }} />
@@ -1054,7 +1198,7 @@ export default function App() {
           <div className="marquee-track" key={k}>
             {marqueeItems.map((item, i) => (
               <div className="marquee-item" key={i}>
-                <span className="marquee-dot">âœ¦</span>{item}
+                <span className="marquee-dot">*</span>{item}
               </div>
             ))}
           </div>
@@ -1069,14 +1213,14 @@ export default function App() {
             <h2 className="section-title fade-up">Every service you<br /><em>need to dominate</em><br />online.</h2>
           </div>
           <p className="services-desc fade-up">
-            From handcrafted websites that stop visitors in their tracks, to SEO strategies that keep delivering results for years â€” I handle the digital growth so you can focus on running your business.
+            From handcrafted websites that stop visitors in their tracks, to SEO strategies that keep delivering results for years, I handle the digital growth so you can focus on running your business.
           </p>
         </div>
         <div className="services-grid">
           {SERVICES.map((s, i) => (
             <div className="service-card fade-up" key={i}>
               <div className="service-num">{String(i + 1).padStart(2, "0")}</div>
-              <div className="service-icon">{s.icon}</div>
+              <div className="service-icon"><Icon name={s.icon} /></div>
               <div className="service-name">{s.name}</div>
               <div className="service-desc">{s.desc}</div>
               <ul className="service-list">
@@ -1094,7 +1238,7 @@ export default function App() {
         <div className="process-grid">
           {PROCESS.map((p, i) => (
             <div className="process-step fade-up" key={i}>
-              {i < PROCESS.length - 1 && <div className="process-arrow">â†’</div>}
+              {i < PROCESS.length - 1 && <div className="process-arrow">&rarr;</div>}
               <div className="process-step-num">{p.num}</div>
               <div className="process-step-title">{p.title}</div>
               <div className="process-step-desc">{p.desc}</div>
@@ -1110,21 +1254,21 @@ export default function App() {
             <div className="section-tag fade-up">Selected Work</div>
             <h2 className="section-title fade-up">Results that<br /><em>speak loudly.</em></h2>
           </div>
-          <a href="#contact" className="btn-ghost fade-up">Start Your Project â†’</a>
+          <a href="#contact" className="btn-ghost fade-up">Start Your Project &rarr;</a>
         </div>
         <div className="portfolio-grid">
           {PROJECTS.map((p, i) => (
             <div className="portfolio-item fade-up" key={i}>
               <div className="portfolio-img">
                 <div className="portfolio-bg" style={{ background: p.color }}>
-                  <span style={{ fontSize: i === 0 ? "6rem" : "4rem" }}>{p.emoji}</span>
+                  <Icon name={p.icon} />
                 </div>
                 <div className="portfolio-overlay">
                   <div className="portfolio-tag-small">{p.tag}</div>
                   <div className="portfolio-item-title">{p.title}</div>
                   <div className="portfolio-item-sub">{p.sub}</div>
                 </div>
-                <a href="#contact" className="portfolio-link">â†’</a>
+                <a href="#contact" className="portfolio-link">&rarr;</a>
               </div>
             </div>
           ))}
@@ -1138,7 +1282,7 @@ export default function App() {
         <div className="testimonials-grid">
           {TESTIMONIALS.map((t, i) => (
             <div className="testimonial-card fade-up" key={i}>
-              <div className="testimonial-stars">{t.stars}</div>
+              <div className="testimonial-stars">{[0, 1, 2, 3, 4].map((star) => <Icon name="star" key={star} />)}</div>
               <p className="testimonial-text">"{t.text}"</p>
               <div className="testimonial-author">
                 <div className="testimonial-avatar" style={{ background: t.color, color: "#111008" }}>{t.initials}</div>
@@ -1170,12 +1314,12 @@ export default function App() {
               <ul className="pricing-features">
                 {p.features.map((f, j) => (
                   <li className="pricing-feature" key={j}>
-                    <span className="pricing-check">âœ“</span>{f}
+                    <span className="pricing-check"><Icon name="check" /></span>{f}
                   </li>
                 ))}
               </ul>
               <button className="pricing-btn" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
-                {p.price === "Custom" ? "Let's Talk â†’" : "Get Started â†’"}
+                {p.price === "Custom" ? "Let's Talk" : "Get Started"} &rarr;
               </button>
             </div>
           ))}
@@ -1187,9 +1331,9 @@ export default function App() {
         <div className="cta-bg" />
         <div className="section-tag fade-up" style={{ justifyContent: "center" }}>Ready?</div>
         <h2 className="cta-title fade-up">Let's build something<br /><em>remarkable</em> together.</h2>
-        <p className="cta-desc fade-up">Your next customer is searching for you right now. Let's make sure they find you â€” and choose you.</p>
+        <p className="cta-desc fade-up">Your next customer is searching for you right now. Let's make sure they find you and choose you.</p>
         <div className="cta-actions fade-up">
-          <a href="#contact" className="btn-primary">Book a Free Consultation â†’</a>
+          <a href="#contact" className="btn-primary">Book a Free Consultation &rarr;</a>
           <a href="mailto:hello@pixelcraft.com" className="btn-ghost" style={{ borderColor: "rgba(245,239,224,0.3)", color: "var(--beige)" }}>hello@pixelcraft.com</a>
         </div>
       </div>
@@ -1201,16 +1345,16 @@ export default function App() {
             <div className="section-tag fade-up">Get In Touch</div>
             <h2 className="contact-info-title fade-up">Let's start your<br />project today.</h2>
             <p className="contact-info-desc fade-up">
-              Fill out the form and I'll get back to you within 24 hours with a tailored proposal. No commitment, no pressure â€” just a conversation about your goals.
+              Fill out the form and I'll get back to you within 24 hours with a tailored proposal. No commitment, no pressure, just a conversation about your goals.
             </p>
             {[
-              { icon: "ðŸ“§", label: "Email", value: "hello@pixelcraft.com" },
-              { icon: "ðŸ“±", label: "WhatsApp", value: "+966 55 123 4567" },
-              { icon: "ðŸ“", label: "Location", value: "Riyadh, Saudi Arabia" },
-              { icon: "â±ï¸", label: "Response Time", value: "Within 24 hours" },
+              { icon: "mail", label: "Email", value: "hello@pixelcraft.com" },
+              { icon: "phone", label: "WhatsApp", value: "+966 55 123 4567" },
+              { icon: "pin", label: "Location", value: "Riyadh, Saudi Arabia" },
+              { icon: "clock", label: "Response Time", value: "Within 24 hours" },
             ].map((d, i) => (
               <div className="contact-detail fade-up" key={i}>
-                <div className="contact-detail-icon">{d.icon}</div>
+                <div className="contact-detail-icon"><Icon name={d.icon} /></div>
                 <div>
                   <div className="contact-detail-label">{d.label}</div>
                   <div className="contact-detail-value">{d.value}</div>
@@ -1221,7 +1365,7 @@ export default function App() {
           <div>
             {submitted ? (
               <div style={{ textAlign: "center", padding: "4rem 2rem", background: "var(--beige)", borderRadius: "4px" }}>
-                <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>âœ‰ï¸</div>
+                <div style={{ fontSize: "3rem", marginBottom: "1rem", display: "flex", justifyContent: "center" }}><Icon name="mail" /></div>
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5rem", marginBottom: "0.75rem" }}>Message Received!</h3>
                 <p style={{ color: "var(--text-muted)", fontSize: "0.95rem" }}>I'll be in touch within 24 hours. Looking forward to working with you.</p>
               </div>
@@ -1253,9 +1397,9 @@ export default function App() {
                     <label className="form-label">Budget Range</label>
                     <select className="form-input" value={formData.budget} onChange={e => setFormData({ ...formData, budget: e.target.value })}>
                       <option value="">Select a range</option>
-                      <option>SAR 1,000 â€“ 2,000</option>
-                      <option>SAR 2,000 â€“ 5,000</option>
-                      <option>SAR 5,000 â€“ 10,000</option>
+                      <option>SAR 1,000 - 2,000</option>
+                      <option>SAR 2,000 - 5,000</option>
+                      <option>SAR 5,000 - 10,000</option>
                       <option>SAR 10,000+</option>
                     </select>
                   </div>
@@ -1265,7 +1409,7 @@ export default function App() {
                   <textarea className="form-textarea" placeholder="Describe your business, your goals, and what you're looking to achieve..." required value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} />
                 </div>
                 <button type="submit" className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>
-                  Send Message â†’
+                  Send Message &rarr;
                 </button>
               </form>
             )}
@@ -1300,7 +1444,7 @@ export default function App() {
               <li><a href="#">Riyadh, Saudi Arabia</a></li>
               <li style={{ marginTop: "1rem" }}>
                 <div style={{ display: "flex", gap: "0.7rem" }}>
-                  {["ð•", "in", "ig", "be"].map(s => (
+                  {["x", "in", "ig", "be"].map(s => (
                     <a href="#" key={s} className="social-link">{s}</a>
                   ))}
                 </div>
@@ -1309,8 +1453,8 @@ export default function App() {
           </div>
         </div>
         <div className="footer-bottom">
-          <div className="footer-copy">Â© 2025 PixelCraft Studio. All rights reserved.</div>
-          <div className="footer-copy">Crafted with care in Riyadh ðŸ‡¸ðŸ‡¦</div>
+          <div className="footer-copy">&copy; 2025 PixelCraft Studio. All rights reserved.</div>
+          <div className="footer-copy">Crafted with care in Riyadh</div>
         </div>
       </footer>
     </>
