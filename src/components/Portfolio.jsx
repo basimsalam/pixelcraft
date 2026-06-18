@@ -30,7 +30,12 @@ export function Portfolio() {
                 <h3 className="portfolio-item-title">{project.title}</h3>
                 <p className="portfolio-item-sub">{project.sub}</p>
               </div>
-              <a href="#contact" className="portfolio-link" aria-label={`Start a project like ${project.title}`}>
+              <a
+                href={project.link || "#contact"}
+                className="portfolio-link"
+                aria-label={project.link ? `View ${project.title}` : `Start a project like ${project.title}`}
+                {...(project.link ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
                 &rarr;
               </a>
             </div>

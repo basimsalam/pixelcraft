@@ -560,7 +560,7 @@ const style = `
     aspect-ratio: 16/10;
     position: relative; overflow: hidden;
   }
-  .portfolio-item:first-child .portfolio-img { aspect-ratio: unset; height: 100%; min-height: 520px; }
+  .portfolio-item:first-child .portfolio-img { aspect-ratio: unset; height: 100%; min-height: 520px; position: relative; }
   .portfolio-bg {
     width: 100%; height: 100%;
     transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
@@ -600,6 +600,70 @@ const style = `
     text-decoration: none;
   }
   .portfolio-item:hover .portfolio-link { opacity: 1; }
+
+.portfolio-overlay-img {
+    background: linear-gradient(to top, rgba(17,16,8,0.95) 0%, rgba(17,16,8,0.3) 50%, transparent 100%) !important;
+    opacity: 1 !important;
+  }
+
+  .tm-mockup-wrap {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(145deg, #0f0f1a 0%, #1a1228 60%, #0d0d18 100%);
+  }
+  .tm-mockup {
+    width: 100%; max-width: 420px;
+    background: #16141f;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+  }
+  .tm-mockup-bar {
+    display: flex; align-items: center; gap: 5px;
+    padding: 0.6rem 0.9rem;
+    background: #1e1b2a;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .tm-dot-r, .tm-dot-y, .tm-dot-g {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .tm-dot-r { background: #FF605C; }
+  .tm-dot-y { background: #FFBD44; }
+  .tm-dot-g { background: #00CA4E; }
+  .tm-addr {
+    flex: 1; margin-left: 0.5rem;
+    background: rgba(255,255,255,0.06); border-radius: 3px;
+    font-size: 0.6rem; color: rgba(255,255,255,0.25);
+    padding: 3px 8px; letter-spacing: 0.04em;
+  }
+  .tm-mockup-body { padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .tm-hero-block {
+    display: flex; gap: 0.75rem; align-items: center;
+    background: rgba(200,169,110,0.06); border-radius: 5px;
+    padding: 1rem;
+  }
+  .tm-hero-text { flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
+  .tm-line-block { height: 7px; border-radius: 3px; background: rgba(255,255,255,0.12); }
+  .tm-line-lg { width: 85%; }
+  .tm-line-md { width: 65%; }
+  .tm-line-sm { width: 45%; }
+  .tm-cta-block {
+    margin-top: 0.4rem; height: 22px; width: 80px; border-radius: 3px;
+    background: var(--accent); opacity: 0.75;
+  }
+  .tm-hero-img {
+    width: 80px; height: 72px; border-radius: 4px; flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(200,169,110,0.25), rgba(200,169,110,0.08));
+    border: 1px solid rgba(200,169,110,0.15);
+  }
+  .tm-cards-row { display: flex; gap: 0.6rem; }
+  .tm-card-block {
+    flex: 1; height: 52px; border-radius: 4px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .tm-card-block:nth-child(2) { background: rgba(200,169,110,0.08); border-color: rgba(200,169,110,0.15); }
 
   /* Testimonials */
   .testimonials { background: var(--black-soft); }
@@ -967,7 +1031,7 @@ const PROCESS = [
 ];
 
 const PROJECTS = [
-  { title: "Luxe Interior Co.", tag: "Web Design + SEO", sub: "400% organic traffic growth in 6 months", color: "linear-gradient(135deg, #2C2A1E 0%, #1E1C10 100%)", icon: "home" },
+  { title: "Thiramaala", tag: "Web Design + Development", sub: "Live project — visit the site", color: "linear-gradient(135deg, #0D0D1A 0%, #1A1228 50%, #0D0D1A 100%)", icon: "monitor", link: "https://thiramaala.vercel.app/", custom: true },
   { title: "Nova Fitness Studio", tag: "Landing Page + Local SEO", sub: "#1 in local search results", color: "linear-gradient(135deg, #1A1910 0%, #2C2A1E 100%)", icon: "activity" },
   { title: "Maison Bakery", tag: "E-commerce + SEO", sub: "3x online revenue in 3 months", color: "linear-gradient(135deg, #241F0E 0%, #1A1910 100%)", icon: "bag" },
 ];
@@ -980,7 +1044,7 @@ const TESTIMONIALS = [
 
 const PRICING = [
   { name: "Starter", price: "1,499", period: "/ project", desc: "Perfect for small businesses launching their digital presence.", features: ["5-page responsive website", "On-page SEO setup", "Google Analytics integration", "Contact form + CTA", "1 month free support"], featured: false },
-  { name: "Growth", price: "2,999", period: "/ project", desc: "The complete package for businesses serious about online growth.", features: ["10-page custom website", "Full SEO strategy & setup", "Local SEO optimization", "Landing page + A/B testing", "3 months support & reporting", "Speed & performance tuning"], featured: true },
+  { name: "Growth", price: "2,499", period: "/ project", desc: "The complete package for businesses serious about online growth.", features: ["10-page custom website", "Full SEO strategy & setup", "Local SEO optimization", "Landing page + A/B testing", "3 months support & reporting", "Speed & performance tuning"], featured: true },
   { name: "Enterprise", price: "Custom", period: "", desc: "Large-scale builds, ongoing retainers, and complex SEO campaigns.", features: ["Unlimited pages & features", "Monthly SEO retainer", "Dedicated account manager", "Custom integrations & CMS", "Priority 24h support", "Quarterly strategy reviews"], featured: false },
 ];
 
@@ -1149,7 +1213,7 @@ export default function App() {
           </div>
           <div className="hero-stats" aria-label="PixelCraft performance highlights">
             <div className="hero-stat">
-              <div className="hero-stat-num">50+</div>
+              <div className="hero-stat-num">10+</div>
               <div className="hero-stat-label">Projects Delivered</div>
             </div>
             <div className="hero-stat">
@@ -1260,22 +1324,49 @@ export default function App() {
           {PROJECTS.map((p, i) => (
             <div className="portfolio-item fade-up" key={i}>
               <div className="portfolio-img">
-                <div className="portfolio-bg" style={{ background: p.color }}>
-                  <Icon name={p.icon} />
+<div className="portfolio-bg" style={{ background: p.color }}>
+                  {p.custom ? (
+                    <div className="tm-mockup-wrap">
+                      <div className="tm-mockup">
+                        <div className="tm-mockup-bar">
+                          <span className="tm-dot-r" /><span className="tm-dot-y" /><span className="tm-dot-g" />
+                          <span className="tm-addr">thiramaala.vercel.app</span>
+                        </div>
+                        <div className="tm-mockup-body">
+                          <div className="tm-hero-block">
+                            <div className="tm-hero-text">
+                              <div className="tm-line-block tm-line-lg" />
+                              <div className="tm-line-block tm-line-md" />
+                              <div className="tm-line-block tm-line-sm" />
+                              <div className="tm-cta-block" />
+                            </div>
+                            <div className="tm-hero-img" />
+                          </div>
+                          <div className="tm-cards-row">
+                            <div className="tm-card-block" />
+                            <div className="tm-card-block" />
+                            <div className="tm-card-block" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <Icon name={p.icon} />
+                  )}
                 </div>
-                <div className="portfolio-overlay">
+                <div className={`portfolio-overlay${p.custom ? " portfolio-overlay-img" : ""}`}>
                   <div className="portfolio-tag-small">{p.tag}</div>
                   <div className="portfolio-item-title">{p.title}</div>
                   <div className="portfolio-item-sub">{p.sub}</div>
                 </div>
-                <a href="#contact" className="portfolio-link">&rarr;</a>
+                <a href={p.link || "#contact"} className="portfolio-link" {...(p.link ? { target: "_blank", rel: "noopener noreferrer" } : {})}>&rarr;</a>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Testimonials — commented out temporarily
       <section className="testimonials">
         <div className="section-tag fade-up">Client Love</div>
         <h2 className="section-title fade-up">Don't take my<br /><em>word for it.</em></h2>
@@ -1295,6 +1386,7 @@ export default function App() {
           ))}
         </div>
       </section>
+      */}
 
       {/* Pricing */}
       <section className="pricing" id="pricing">
@@ -1334,7 +1426,7 @@ export default function App() {
         <p className="cta-desc fade-up">Your next customer is searching for you right now. Let's make sure they find you and choose you.</p>
         <div className="cta-actions fade-up">
           <a href="#contact" className="btn-primary">Book a Free Consultation &rarr;</a>
-          <a href="mailto:hello@pixelcraft.com" className="btn-ghost" style={{ borderColor: "rgba(245,239,224,0.3)", color: "var(--beige)" }}>hello@pixelcraft.com</a>
+          <a href="mailto:basimsalam22@gmail.com" className="btn-ghost" style={{ borderColor: "rgba(245,239,224,0.3)", color: "var(--beige)" }}>basimsalam22@gmail.com</a>
         </div>
       </div>
 
@@ -1348,8 +1440,8 @@ export default function App() {
               Fill out the form and I'll get back to you within 24 hours with a tailored proposal. No commitment, no pressure, just a conversation about your goals.
             </p>
             {[
-              { icon: "mail", label: "Email", value: "hello@pixelcraft.com" },
-              { icon: "phone", label: "WhatsApp", value: "+966 55 123 4567" },
+              { icon: "mail", label: "Email", value: "basimsalam22@gmail.com" },
+              { icon: "phone", label: "WhatsApp", value: "+966 506536605" },
               { icon: "pin", label: "Location", value: "Riyadh, Saudi Arabia" },
               { icon: "clock", label: "Response Time", value: "Within 24 hours" },
             ].map((d, i) => (
@@ -1439,7 +1531,7 @@ export default function App() {
           <div>
             <div className="footer-col-title">Contact</div>
             <ul className="footer-links">
-              <li><a href="mailto:basimnnas@gmail.com">basimnnas@gmail.com</a></li>
+              <li><a href="mailto:basimsalam22@gmail.com">basimsalam22@gmail.com</a></li>
               <li><a href="tel:+966506536605">+966 50 65 36 605</a></li>
               <li><a href="#">Riyadh, Saudi Arabia</a></li>
               <li style={{ marginTop: "1rem" }}>

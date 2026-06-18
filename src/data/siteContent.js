@@ -65,11 +65,12 @@ export const processSteps = [
 
 export const projects = [
   {
-    title: "Luxe Interior Co.",
-    tag: "Web Design + SEO",
-    sub: "400% organic traffic growth in 6 months",
-    color: "linear-gradient(135deg, #2C2A1E 0%, #111008 100%)",
-    visual: "HOME",
+    title: "Thiramaala",
+    tag: "Web Design + Development",
+    sub: "Live project — visit the site",
+    color: "linear-gradient(135deg, #1A1A2E 0%, #0D0D1A 100%)",
+    visual: "TM",
+    link: "https://thiramaala.vercel.app/",
   },
   {
     title: "Nova Fitness Studio",
