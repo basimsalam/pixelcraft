@@ -539,64 +539,66 @@ const style = `
   }
 
   /* Portfolio */
-  .portfolio { background: var(--beige); }
+  .portfolio { background: var(--beige); padding-top: 2rem; padding-bottom: 2rem; }
   .portfolio-header {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1rem;
   }
+  .portfolio-header .section-title { font-size: clamp(1.8rem, 2.8vw, 2.6rem); line-height: 1.15; }
+  .portfolio-header .section-tag { font-size: 0.68rem; margin-bottom: 0.5rem; }
+  .portfolio-header .btn-ghost { padding: 0.5rem 1.2rem; font-size: 0.72rem; }
   .portfolio-grid {
     display: grid;
     grid-template-columns: 1.4fr 1fr;
     grid-template-rows: auto auto;
-    gap: 1.5rem;
+    gap: 0.6rem;
   }
   .portfolio-item {
     background: var(--black);
     border-radius: 4px; overflow: hidden;
     position: relative; cursor: none;
-    group: true;
   }
   .portfolio-item:first-child { grid-row: span 2; }
   .portfolio-img {
-    aspect-ratio: 16/10;
+    aspect-ratio: 16/5;
     position: relative; overflow: hidden;
   }
-  .portfolio-item:first-child .portfolio-img { aspect-ratio: unset; height: 100%; min-height: 520px; position: relative; }
+  .portfolio-item:first-child .portfolio-img { aspect-ratio: unset; height: 100%; min-height: 160px; position: relative; }
   .portfolio-bg {
     width: 100%; height: 100%;
     transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
     display: flex; align-items: center; justify-content: center;
-    font-size: 4rem;
+    font-size: 2.5rem;
   }
   .portfolio-item:hover .portfolio-bg { transform: scale(1.05); }
   .portfolio-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(17,16,8,0.9) 0%, transparent 60%);
+    background: linear-gradient(to top, rgba(17,16,8,0.92) 0%, transparent 65%);
     display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 2rem;
+    padding: 0.85rem;
     opacity: 0; transition: opacity 0.3s;
   }
   .portfolio-item:first-child .portfolio-overlay { opacity: 1; }
   .portfolio-item:hover .portfolio-overlay { opacity: 1; }
   .portfolio-tag-small {
-    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 0.4rem;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.3rem;
   }
   .portfolio-item-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.3rem; font-weight: 700;
-    color: var(--beige); margin-bottom: 0.4rem;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--beige); margin-bottom: 0.2rem;
   }
   .portfolio-item-sub {
     font-size: 0.82rem; color: rgba(245,239,224,0.6);
   }
   .portfolio-link {
-    position: absolute; top: 1.5rem; right: 1.5rem;
-    width: 36px; height: 36px;
+    position: absolute; top: 0.75rem; right: 0.75rem;
+    width: 26px; height: 26px;
     background: var(--accent);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 0.9rem; color: var(--black);
+    font-size: 0.72rem; color: var(--black);
     opacity: 0; transition: opacity 0.3s;
     text-decoration: none;
   }
@@ -610,57 +612,57 @@ const style = `
   .tm-mockup-wrap {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
-    padding: 2rem;
+    padding: 1rem;
     background: linear-gradient(145deg, #0f0f1a 0%, #1a1228 60%, #0d0d18 100%);
   }
   .tm-mockup {
-    width: 100%; max-width: 420px;
+    width: 100%; max-width: 320px;
     background: #16141f;
-    border-radius: 8px;
+    border-radius: 6px;
     overflow: hidden;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
   }
   .tm-mockup-bar {
-    display: flex; align-items: center; gap: 5px;
-    padding: 0.6rem 0.9rem;
+    display: flex; align-items: center; gap: 4px;
+    padding: 0.4rem 0.7rem;
     background: #1e1b2a;
     border-bottom: 1px solid rgba(255,255,255,0.05);
   }
   .tm-dot-r, .tm-dot-y, .tm-dot-g {
-    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
   }
   .tm-dot-r { background: #FF605C; }
   .tm-dot-y { background: #FFBD44; }
   .tm-dot-g { background: #00CA4E; }
   .tm-addr {
-    flex: 1; margin-left: 0.5rem;
-    background: rgba(255,255,255,0.06); border-radius: 3px;
-    font-size: 0.6rem; color: rgba(255,255,255,0.25);
-    padding: 3px 8px; letter-spacing: 0.04em;
+    flex: 1; margin-left: 0.4rem;
+    background: rgba(255,255,255,0.06); border-radius: 2px;
+    font-size: 0.52rem; color: rgba(255,255,255,0.25);
+    padding: 2px 6px; letter-spacing: 0.03em;
   }
-  .tm-mockup-body { padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .tm-mockup-body { padding: 0.6rem; display: flex; flex-direction: column; gap: 0.5rem; }
   .tm-hero-block {
-    display: flex; gap: 0.75rem; align-items: center;
-    background: rgba(200,169,110,0.06); border-radius: 5px;
-    padding: 1rem;
+    display: flex; gap: 0.5rem; align-items: center;
+    background: rgba(200,169,110,0.06); border-radius: 4px;
+    padding: 0.6rem;
   }
-  .tm-hero-text { flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
-  .tm-line-block { height: 7px; border-radius: 3px; background: rgba(255,255,255,0.12); }
+  .tm-hero-text { flex: 1; display: flex; flex-direction: column; gap: 0.3rem; }
+  .tm-line-block { height: 5px; border-radius: 2px; background: rgba(255,255,255,0.12); }
   .tm-line-lg { width: 85%; }
   .tm-line-md { width: 65%; }
   .tm-line-sm { width: 45%; }
   .tm-cta-block {
-    margin-top: 0.4rem; height: 22px; width: 80px; border-radius: 3px;
+    margin-top: 0.3rem; height: 14px; width: 54px; border-radius: 2px;
     background: var(--accent); opacity: 0.75;
   }
   .tm-hero-img {
-    width: 80px; height: 72px; border-radius: 4px; flex-shrink: 0;
+    width: 52px; height: 46px; border-radius: 3px; flex-shrink: 0;
     background: linear-gradient(135deg, rgba(200,169,110,0.25), rgba(200,169,110,0.08));
     border: 1px solid rgba(200,169,110,0.15);
   }
-  .tm-cards-row { display: flex; gap: 0.6rem; }
+  .tm-cards-row { display: flex; gap: 0.4rem; }
   .tm-card-block {
-    flex: 1; height: 52px; border-radius: 4px;
+    flex: 1; height: 30px; border-radius: 3px;
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.06);
   }
